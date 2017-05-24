@@ -26,13 +26,16 @@ namespace ResellerWebservice.Entities
         [DataMember]
         public string InscricaoMunicipal { get; set; }
         [DataMember]
-        public string Telefone { get; set; }
+        public string Telephone { get; set; }
         [DataMember]
         public string CustomerId { get; set; }
         [DataMember]
         public Address Address { get; set; }
-
         [DataMember]
         public Contact[] Contacts { get; set; }
+        [DataMember]
+        public bool IsEndUser { get; set; }
+        [DataMember]
+        public bool IsFreezone { get; set; }
     }
 }

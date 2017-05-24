@@ -35,6 +35,6 @@ namespace ResellerWebservice.Interfaces
         Location[] ListCities(string stateCode);
 
         [OperationContract]
-        Response();
+        User IsUserValid(string login, string password);
     }
 }
