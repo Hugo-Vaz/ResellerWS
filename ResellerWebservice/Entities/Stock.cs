@@ -12,7 +12,11 @@ namespace ResellerWebservice.Entities
     public class Stock
     {
         [DataMember]
-        public string Descricao { get; set; }
+        public string Description { get; set; }
+        [DataMember]
+        public string Message { get; set; }
+        [DataMember]
+        public bool Success { get; set; }
         [DataMember]
         public decimal ICMS { get; set; }      
         [DataMember]
@@ -32,13 +36,13 @@ namespace ResellerWebservice.Entities
         [DataMember]
         public decimal FatorVenda { get; set; }
         [DataMember]
-        public String FatorVendaCodigo { get; set; }
+        public String FatorVendaCode { get; set; }
         [DataMember]
         public decimal NetPrice { get; set; }      
         [DataMember]
         public String CodVendor { get; set; }
         [DataMember]
-        public String Fabricante { get; set; }
+        public String Vendor { get; set; }
         [DataMember]
         public decimal Promo { get; set; }
     }

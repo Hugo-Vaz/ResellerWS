@@ -177,12 +177,16 @@
     <Compile Include="Entities\Address.cs" />
     <Compile Include="Entities\Company.cs" />
     <Compile Include="Entities\Contact.cs" />
+    <Compile Include="Entities\EconomicGroup.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\Response.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Interfaces\IResellerService.cs" />
+    <Compile Include="Mappers\AddressMapper.cs" />
+    <Compile Include="Mappers\CompanyMapper.cs" />
+    <Compile Include="Mappers\LocationMapper.cs" />
     <Compile Include="Services\ResellerService.svc.cs">
       <DependentUpon>ResellerService.svc</DependentUpon>
     </Compile>
@@ -225,9 +229,7 @@
       <CachedSettingsPropName>ResellerWebservice_PartnerPortalWebservice_PartnerPortal</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Mappers\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

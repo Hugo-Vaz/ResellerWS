@@ -28,7 +28,7 @@ namespace ResellerWebservice.Entities
         [DataMember]
         public string Telephone { get; set; }
         [DataMember]
-        public string CustomerId { get; set; }
+        public long CustomerId { get; set; }
         [DataMember]
         public Address Address { get; set; }
         [DataMember]

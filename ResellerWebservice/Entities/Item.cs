@@ -12,11 +12,16 @@ namespace ResellerWebservice.Entities
     public class Item
     {
         [DataMember]
-        public string Partnumber { get; set; }
+        public string SKU { get; set; }
         [DataMember]
         public int Quantity { get; set; }
-
         [DataMember]
         public decimal Uplift{ get; set; }
+        [DataMember]
+        public decimal NetPrice { get; set; }
+        [DataMember]
+        public decimal PurchasePrice { get; set; }
+        [DataMember]
+        public decimal Discount { get; set; }
     }
 }
