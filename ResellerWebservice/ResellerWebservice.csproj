@@ -180,13 +180,21 @@
     <Compile Include="Entities\EconomicGroup.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\Location.cs" />
+    <Compile Include="Entities\Proposal.cs" />
+    <Compile Include="Entities\ProposalOption.cs" />
+    <Compile Include="Entities\Quote.cs" />
+    <Compile Include="Entities\QuoteLine.cs" />
+    <Compile Include="Entities\ResellerTracking.cs" />
     <Compile Include="Entities\Response.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\User.cs" />
     <Compile Include="Interfaces\IResellerService.cs" />
-    <Compile Include="Mappers\AddressMapper.cs" />
     <Compile Include="Mappers\CompanyMapper.cs" />
     <Compile Include="Mappers\LocationMapper.cs" />
+    <Compile Include="Mappers\ProposalMapper.cs" />
+    <Compile Include="Mappers\QuoteMapper.cs" />
+    <Compile Include="Mappers\ResellerTrackingMapper.cs" />
+    <Compile Include="Mappers\StockMapper.cs" />
     <Compile Include="Services\ResellerService.svc.cs">
       <DependentUpon>ResellerService.svc</DependentUpon>
     </Compile>

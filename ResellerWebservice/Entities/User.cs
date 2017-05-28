@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
+using System.Xml.Serialization;
 
 namespace ResellerWebservice.Entities
 {
+    [DataContract(IsReference = true)]
+    [XmlRoot(Namespace = "Generic", ElementName = "User")]
     public class User
     {
         [DataMember]
