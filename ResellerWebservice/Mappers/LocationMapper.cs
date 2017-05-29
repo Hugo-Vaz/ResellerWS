@@ -7,9 +7,9 @@ using System.Web;
 
 namespace ResellerWebservice.Mappers
 {
-    public class LocationMapper
+    public static class LocationMapper
     {
-        public Location[] ConvertDatatableToModel(DataTable data)
+        public static Location[] ConvertDatatableToModel(DataTable data)
         {
             List<Location> list = new List<Location>();
             foreach(DataRow row in data.Rows)

@@ -17,14 +17,15 @@ namespace ResellerWebservice.Entities
         public string Password { get; set; }
         [DataMember]
         public bool IsBlocked { get; set; }
+      
         [DataMember]
         public string Cellphone { get; set; }
         [DataMember]
         public string UniqueIdentifier { get; set; }
         [DataMember]
-        public string VendorCode { get; set; }
+        public string AccountManagerCode { get; set; }
         [DataMember]
-        public string CustomerID { get; set; }
+        public int CustomerID { get; set; }
         [DataMember]
         public EconomicGroup EconomicGroup { get; set; }
         [DataMember]

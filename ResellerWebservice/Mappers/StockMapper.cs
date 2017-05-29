@@ -8,7 +8,7 @@ namespace ResellerWebservice.Mappers
 {
     public class StockMapper
     {
-        public Stock ConvertWebserviceToInterface(PartnerPortalWebservice.StockItem wsStock)
+        public Stock ConvertWebserviceToInterface(ResellerWebservice.StockItem wsStock)
         {
             Stock stock = new Stock();
             stock.CodVendor = wsStock.CodVendor;

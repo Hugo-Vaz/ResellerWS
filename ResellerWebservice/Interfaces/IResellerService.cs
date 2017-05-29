@@ -13,26 +13,26 @@ namespace ResellerWebservice.Interfaces
     public interface IResellerService
     {
         [OperationContract]
-        Stock[] CheckStock(string[] partNumbers, int erp, bool activeOnly);
+        Stock[] CheckStock(User user, string[] partNumbers, int erp, bool activeOnly);
 
         [OperationContract]
-        Response GenerateQuote(Item[] items, string from,string to, bool directInvoice, string endUserCode);
+        Response GenerateQuote(User user, Item[] items, string from,string to, bool directInvoice, string endUserCode);
 
         [OperationContract]
-        Response GenerateProposal(Item[] items, string from, string to, bool directInvoice, string endUserCode,bool sendEmail, string[] cc);
+        Response GenerateProposal(User user, Item[] items, string from, string to, bool directInvoice, string endUserCode,bool sendEmail, string[] cc);
 
         [OperationContract]
-        Company GetCompany(string companyCode);
+        Company GetCompany(User user, string companyCode, int codERP);
 
         [OperationContract]
-        Response CompanyInsert(Company company);
+        Response CompanyInsert(User user, Company company);
 
         [OperationContract]
-        Location[] ListCountries();
+        Location[] ListCountries(User user,string countryName);
         [OperationContract]
-        Location[] ListStates(string countryCode);
+        Location[] ListStates(User user, string countryCode,string stateName);
         [OperationContract]
-        Location[] ListCities(string stateCode);
+        Location[] ListCities(User user, string stateCode,string cityName);
 
         [OperationContract]
         User IsUserValid(string login, string password);

@@ -8,7 +8,7 @@ namespace ResellerWebservice.Mappers
 {
     public class QuoteMapper
     {
-        public Quote WebserviceToInterface(PartnerPortalWebservice.Quotation wsQuote)
+        public static Quote WebserviceToInterface(PartnerPortalWebservice.Quotation wsQuote)
         {
             Quote quote = new Quote();
             quote.Details = wsQuote.Detalhes;
@@ -18,13 +18,13 @@ namespace ResellerWebservice.Mappers
             List<QuoteLine> lines = new List<QuoteLine>();
             foreach(PartnerPortalWebservice.Item wsItem in wsQuote.Itens)
             {
-                lines.Add(this.WebserviceToInterface(wsItem));
+                lines.Add(QuoteMapper.WebserviceToInterface(wsItem));
             }
             quote.QuoteLines = lines.ToArray();
             return quote;
         }
 
-        public QuoteLine WebserviceToInterface(PartnerPortalWebservice.Item wsItem)
+        public static QuoteLine WebserviceToInterface(PartnerPortalWebservice.Item wsItem)
         {
             QuoteLine line = new QuoteLine();
             line.Currency = wsItem.Moeda;

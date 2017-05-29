@@ -6,9 +6,9 @@ using System.Web;
 
 namespace ResellerWebservice.Mappers
 {
-    public class ProposalMapper
+    public static class ProposalMapper
     {
-        public Proposal ConvertWebserviceToInterface(PartnerPortalWebservice.ProposalResponse wsProposal)
+        public static Proposal ConvertWebserviceToInterface(ResellerWebservice.ProposalResponse wsProposal)
         {
             Proposal proposal = new Proposal();
             proposal.Name = wsProposal.Proposta.NomeProposta;
@@ -27,16 +27,16 @@ namespace ResellerWebservice.Mappers
             proposal.Version = wsProposal.Proposta.Versao;
 
             List<ProposalOption> options = new List<ProposalOption>();
-            foreach (PartnerPortalWebservice.OptionResponse wsOption in wsProposal.Opcoes)
+            foreach (ResellerWebservice.OptionResponse wsOption in wsProposal.Opcoes)
             {
-                options.Add(this.ConvertWebserviceToInterface(wsOption));
+                options.Add(ProposalMapper.ConvertWebserviceToInterface(wsOption));
             }
 
             proposal.Options = options.ToArray();
             return proposal;
         }
 
-        public ProposalOption ConvertWebserviceToInterface(PartnerPortalWebservice.OptionResponse wsOption)
+        public static ProposalOption ConvertWebserviceToInterface(ResellerWebservice.OptionResponse wsOption)
         {
             ProposalOption option = new ProposalOption();
             option.DollarValue = wsOption.ValorDollar;
@@ -46,16 +46,16 @@ namespace ResellerWebservice.Mappers
             option.ShowInBRL = wsOption.MostrarEmReal;
 
             List<Item> items = new List<Item>();
-            foreach(PartnerPortalWebservice.OpcaoPart wsItem in wsOption.Itens)
+            foreach(ResellerWebservice.OpcaoPart wsItem in wsOption.Itens)
             {
-                items.Add(this.ConvertWebserviceToInterface(wsItem));
+                items.Add(ProposalMapper.ConvertWebserviceToInterface(wsItem));
             }
 
             option.Items = items.ToArray();
             return option;
         }
 
-        public Item ConvertWebserviceToInterface(PartnerPortalWebservice.OpcaoPart wsItem)
+        public static Item ConvertWebserviceToInterface(ResellerWebservice.OpcaoPart wsItem)
         {
             Item item = new Item();
             item.Discount = wsItem.Desconto;

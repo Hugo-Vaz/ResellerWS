@@ -6,9 +6,9 @@ using System.Web;
 
 namespace ResellerWebservice.Mappers
 {
-    public class CompanyMapper
+    public static class CompanyMapper
     {
-        public Company ConvertWebserviceToInterface(PartnerPortalWebservice.Company wsCompany, PartnerPortalWebservice.Contato[] wsContatos)
+        public static Company ConvertWebserviceToInterface(ResellerWebservice.Company wsCompany, ResellerWebservice.Contato[] wsContatos = null)
         {
             Company company = new Company();
 
@@ -39,29 +39,32 @@ namespace ResellerWebservice.Mappers
             company.Address.Country.WestconCode = wsCompany.ukeyPais;
             company.Address.Country.Name = wsCompany.Pais;
 
-            List<Contact> list = new List<Contact>();
-
-            foreach (PartnerPortalWebservice.Contato contato in wsContatos)
+            if (wsContatos != null)
             {
-                Contact c = new Contact();
-                c.Email = contato.Email;
-                c.Name = contato.Nome;
-                c.Phone = contato.Telefone;
-                c.ReceiveFinancialInfo = contato.RecebeInfoFinanceira;
-                c.ReceiveNFe = contato.RecebeNFe;
-                c.ReceiveNFeXML = contato.RecebeXMLNota;
+                List<Contact> list = new List<Contact>();
 
-                list.Add(c);
+                foreach (ResellerWebservice.Contato contato in wsContatos)
+                {
+                    Contact c = new Contact();
+                    c.Email = contato.Email;
+                    c.Name = contato.Nome;
+                    c.Phone = contato.Telefone;
+                    c.ReceiveFinancialInfo = contato.RecebeInfoFinanceira;
+                    c.ReceiveNFe = contato.RecebeNFe;
+                    c.ReceiveNFeXML = contato.RecebeXMLNota;
+
+                    list.Add(c);
+                }
+
+                company.Contacts = list.ToArray();
             }
-
-            company.Contacts = list.ToArray();
 
             return company;
         }
 
-        public PartnerPortalWebservice.Company ConvertInterfaceToWebservice(Company company, ref PartnerPortalWebservice.Contato[] wsContatos)
+        public static ResellerWebservice.Company ConvertInterfaceToWebservice(Company company, ref List<ResellerWebservice.Contato> wsContatos)
         {
-            PartnerPortalWebservice.Company wsCompany = new PartnerPortalWebservice.Company();
+            ResellerWebservice.Company wsCompany = new ResellerWebservice.Company();
 
             company.Address = new Address();
             wsCompany.CNPJ = company.CNPJ;
@@ -87,11 +90,11 @@ namespace ResellerWebservice.Mappers
             wsCompany.ukeyPais = company.Address.Country.WestconCode;
             wsCompany.Pais = company.Address.Country.Name;
 
-            List<PartnerPortalWebservice.Contato> list = new List<PartnerPortalWebservice.Contato>();
+            List<ResellerWebservice.Contato> list = new List<ResellerWebservice.Contato>();
 
             foreach (Contact contato in company.Contacts)
             {
-                PartnerPortalWebservice.Contato c = new PartnerPortalWebservice.Contato();
+                ResellerWebservice.Contato c = new ResellerWebservice.Contato();
                 c.Email = contato.Email;
                 c.Nome = contato.Name;
                 c.Telefone = contato.Phone;
@@ -102,7 +105,7 @@ namespace ResellerWebservice.Mappers
                 list.Add(c);
             }
 
-            wsContatos = list.ToArray();
+            wsContatos = list;
 
             return wsCompany;
         }

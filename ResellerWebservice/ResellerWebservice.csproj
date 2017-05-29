@@ -115,7 +115,15 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\PartnerPortalWebservice\PartnerPortal.disco" />
-    <Content Include="Web.config" />
+    <Content Include="Web References\ResellerWebservice\CompanyResponse1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\GenericResponse1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\ProposalResponse1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\PartnerPortalWebservice\PartnerPortal.wsdl" />
     <Content Include="Web References\PartnerPortalWebservice\Pedido.datasource">
       <DependentUpon>Reference.map</DependentUpon>
@@ -172,6 +180,12 @@
     <Content Include="Web References\PartnerPortalWebservice\VendorResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <None Include="Web References\ResellerWebservice\Reseller.disco" />
+    <Content Include="Web.config" />
+    <None Include="Web References\ResellerWebservice\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Address.cs" />
@@ -188,6 +202,8 @@
     <Compile Include="Entities\Response.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\User.cs" />
+    <Compile Include="Helpers\ConversionTool.cs" />
+    <Compile Include="Helpers\UserValidator.cs" />
     <Compile Include="Interfaces\IResellerService.cs" />
     <Compile Include="Mappers\CompanyMapper.cs" />
     <Compile Include="Mappers\LocationMapper.cs" />
@@ -195,6 +211,7 @@
     <Compile Include="Mappers\QuoteMapper.cs" />
     <Compile Include="Mappers\ResellerTrackingMapper.cs" />
     <Compile Include="Mappers\StockMapper.cs" />
+    <Compile Include="Mappers\UserMapper.cs" />
     <Compile Include="Services\ResellerService.svc.cs">
       <DependentUpon>ResellerService.svc</DependentUpon>
     </Compile>
@@ -209,8 +226,32 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\ResellerWebservice\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Web References\ResellerWebservice\Reseller.wsdl" />
+    <Content Include="Web References\ResellerWebservice\ResellerTracking1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\Retorno1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\SKUResponse1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\Stock1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\StockPremium1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\UserResponse1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -229,6 +270,17 @@
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\PartnerPortalWebservice\</RelPath>
       <UpdateFromURL>http://webserviceshlg.westcon.com.br/PartnerPortal.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>ResellerWebservice_PartnerPortalWebservice_PartnerPortal</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://webserviceshlg.westcon.com.br/Reseller.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ResellerWebservice\</RelPath>
+      <UpdateFromURL>http://webserviceshlg.westcon.com.br/Reseller.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

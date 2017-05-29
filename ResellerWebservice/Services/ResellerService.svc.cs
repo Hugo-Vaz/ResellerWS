@@ -5,6 +5,9 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.Text;
 using ResellerWebservice.Entities;
+using ResellerWebservice.Mappers;
+using ResellerWebservice.Helpers;
+using System.Data;
 
 namespace ResellerWebservice.Interfaces
 {
@@ -12,49 +15,83 @@ namespace ResellerWebservice.Interfaces
     // NOTE: In order to launch WCF Test Client for testing this service, please select ResellerService.svc or ResellerService.svc.cs at the Solution Explorer and start debugging.
     public class ResellerService : IResellerService
     {
-        public Stock[] CheckStock(string[] partNumbers, int erp, bool activeOnly)
+        public Stock[] CheckStock(User user, string[] partNumbers, int erp, bool activeOnly)
         {
             throw new NotImplementedException();
         }
 
-        public Response CompanyInsert(Company company)
+        public Response CompanyInsert(User user, Company company)
+        {
+            UserValidator.CheckUser(user);
+            ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
+            List<ResellerWebservice.Contato> contatos = new List<ResellerWebservice.Contato>();
+
+            ResellerWebservice.Company resp = CompanyMapper.ConvertInterfaceToWebservice(company,ref contatos);
+
+            return CompanyMapper.ConvertWebserviceToInterface(resp.Company, null);
+        }
+
+        public Response GenerateProposal(User user, Item[] items, string from, string to, bool directInvoice, string endUserCode, bool sendEmail, string[] cc)
         {
             throw new NotImplementedException();
         }
 
-        public Response GenerateProposal(Item[] items, string from, string to, bool directInvoice, string endUserCode, bool sendEmail, string[] cc)
+        public Response GenerateQuote(User user, Item[] items, string from, string to, bool directInvoice, string endUserCode)
         {
             throw new NotImplementedException();
         }
 
-        public Response GenerateQuote(Item[] items, string from, string to, bool directInvoice, string endUserCode)
+        public Company GetCompany(User user, string companyCode,int codERP)
         {
-            throw new NotImplementedException();
-        }
+            UserValidator.CheckUser(user);
+            ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
+            ResellerWebservice.CompanyResponse resp = webservice.Company_GetData(companyCode, codERP);
 
-        public Company GetCompany(string companyCode)
-        {
-            throw new NotImplementedException();
+            return CompanyMapper.ConvertWebserviceToInterface(resp.Company, null);
         }
 
         public User IsUserValid(string login, string password)
         {
-            throw new NotImplementedException();
+            try
+            {
+                ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
+                ResellerWebservice.UserResponse resp = webservice.IsUserValid(login, password);
+
+                return UserMapper.ConvertWebserviceToInterface(resp);
+
+            }
+            catch (Exception e)
+            {
+                FaultCode prionFaultCode = new FaultCode("101");
+                throw new FaultException("User Error: " + e.Message, prionFaultCode);
+            }
         }
 
-        public Location[] ListCities(string stateCode)
+        public Location[] ListCities(User user, string stateCode, string cityName)
         {
-            throw new NotImplementedException();
+            UserValidator.CheckUser(user);
+            ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
+            DataTable dt = webservice.Applications_Cities(stateCode, cityName);
+
+            return LocationMapper.ConvertDatatableToModel(dt);
         }
 
-        public Location[] ListCountries()
+        public Location[] ListCountries(User user,string countryName)
         {
-            throw new NotImplementedException();
+            UserValidator.CheckUser(user);
+            ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
+            DataTable dt = webservice.Applications_Countries(countryName);
+
+            return LocationMapper.ConvertDatatableToModel(dt);
         }
 
-        public Location[] ListStates(string countryCode)
+        public Location[] ListStates(User user, string countryCode,string stateName)
         {
-            throw new NotImplementedException();
+            UserValidator.CheckUser(user);
+            ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
+            DataTable dt = webservice.Applications_Cities(countryCode, stateName);
+
+            return LocationMapper.ConvertDatatableToModel(dt);
         }
     }
 }

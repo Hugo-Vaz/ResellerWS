@@ -1,4 +1,5 @@
 ﻿using ResellerWebservice.Entities;
+using ResellerWebservice.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,21 +9,21 @@ using System.Web;
 
 namespace ResellerWebservice.Mappers
 {
-    public class ResellerTrackingMapper
+    public static class ResellerTrackingMapper
     {
-        public ResellerTracking[] ConvertDatatableToInterface(DataTable data)
+        public static ResellerTracking[] ConvertDatatableToInterface(DataTable data)
         {
             List<ResellerTracking> tracks = new List<ResellerTracking>();
             foreach (DataRow row in data.Rows)
             {
                 ResellerTracking track = new ResellerTracking();
-                track.BrazilianDate = this.ToDate(row["DataBrasil"].ToString());
-                track.CiscoOrderApprovalDate = this.ToDate(row["DataPoCisco"].ToString());
-                track.CiscoOriginalForecast = this.ToDate(row["PrevisaoOriginalPoCisco"].ToString());
-                track.CurrentBrazilianForecast = this.ToDate(row["PrevisaoAtualBrasil"].ToString());
-                track.CurrentForecast = this.ToDate(row["PrevisaoAtual"].ToString());
-                track.CustomCurrentForecast = this.ToDate(row["PrevisaoAtualAlfandega"].ToString());
-                track.OrderApprovalDate = this.ToDate(row["DataAceiteOV"].ToString());
+                track.BrazilianDate = ConversionTool.ToDate(row["DataBrasil"].ToString());
+                track.CiscoOrderApprovalDate = ConversionTool.ToDate(row["DataPoCisco"].ToString());
+                track.CiscoOriginalForecast = ConversionTool.ToDate(row["PrevisaoOriginalPoCisco"].ToString());
+                track.CurrentBrazilianForecast = ConversionTool.ToDate(row["PrevisaoAtualBrasil"].ToString());
+                track.CurrentForecast = ConversionTool.ToDate(row["PrevisaoAtual"].ToString());
+                track.CustomCurrentForecast = ConversionTool.ToDate(row["PrevisaoAtualAlfandega"].ToString());
+                track.OrderApprovalDate = ConversionTool.ToDate(row["DataAceiteOV"].ToString());
                 track.ParametrizCanal = row["ParametrizCanal"].ToString();
                 track.Qty = Convert.ToInt32(row["Qtd"].ToString());
                 track.Remarks = row["Observacoes"].ToString();
@@ -38,30 +39,6 @@ namespace ResellerWebservice.Mappers
             return tracks.ToArray();
         }
 
-        private DateTime? ToDate(string value)
-        {
-            try
-            {
-                if (String.IsNullOrEmpty(value))
-                {
-                    return null;
-                }
-
-                string[] formats = new string[4];
-                formats[0] = "dd-MMM-yy";
-                formats[1] = "dd/MMM/yyyy";
-                formats[2] = "dd-MMM-yy;HH:mm:ss";
-                formats[3] = "dd/MM/yyyy";
-                return DateTime.ParseExact(value, formats, CultureInfo.InvariantCulture,
-                                               DateTimeStyles.AssumeUniversal |
-                                               DateTimeStyles.AdjustToUniversal);
-            }
-            catch
-            {
-                return null;
-            }
-
-
-        }
+       
     }
 }
