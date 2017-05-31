@@ -14,6 +14,13 @@ namespace ResellerWebservice.Entities
         [DataMember]
         public string Message { get; set; }
         [DataMember]
-        public string Success { get; set; }
+        public bool Success { get; set; }
+
+        public Response() { }
+        public Response(string message,bool success)
+        {
+            this.Message = message;
+            this.Success = success;
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace ResellerWebservice.Interfaces
         Response GenerateQuote(User user, Item[] items, string from,string to, bool directInvoice, string endUserCode);
 
         [OperationContract]
-        Response GenerateProposal(User user, Item[] items, string from, string to, bool directInvoice, string endUserCode,bool sendEmail, string[] cc);
+        Response GenerateProposal(User user, Item[] items, ProposalRequest proposalData);
 
         [OperationContract]
         Company GetCompany(User user, string companyCode, int codERP);

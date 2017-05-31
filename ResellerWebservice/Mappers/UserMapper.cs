@@ -12,6 +12,7 @@ namespace ResellerWebservice.Mappers
         {
             User user = new User();
             user.Cellphone = wsUser.User.Celular;
+            user.Login = wsUser.User.Login;
             user.CustomerID = wsUser.User.CustomerID;
             user.IsBlocked = Convert.ToBoolean(wsUser.User.Bloqueado);
             user.Name = wsUser.User.NomeUsuario;

@@ -6,9 +6,9 @@ using System.Web;
 
 namespace ResellerWebservice.Mappers
 {
-    public class StockMapper
+    public static class StockMapper
     {
-        public Stock ConvertWebserviceToInterface(ResellerWebservice.StockItem wsStock)
+        public static Stock ConvertWebserviceToInterface(ResellerWebservice.StockItem wsStock)
         {
             Stock stock = new Stock();
             stock.CodVendor = wsStock.CodVendor;

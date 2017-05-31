@@ -17,7 +17,17 @@ namespace ResellerWebservice.Interfaces
     {
         public Stock[] CheckStock(User user, string[] partNumbers, int erp, bool activeOnly)
         {
-            throw new NotImplementedException();
+            UserValidator.CheckUser(user);
+            ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
+            ResellerWebservice.Stock wsStock = webservice.CheckStock(partNumbers, erp);
+            List<Stock> stocks = new List<Stock>();
+
+            foreach(ResellerWebservice.StockItem s in wsStock.Items)
+            {
+                stocks.Add(StockMapper.ConvertWebserviceToInterface(s));
+            }
+
+            return stocks.ToArray();
         }
 
         public Response CompanyInsert(User user, Company company)
@@ -26,14 +36,36 @@ namespace ResellerWebservice.Interfaces
             ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
             List<ResellerWebservice.Contato> contatos = new List<ResellerWebservice.Contato>();
 
-            ResellerWebservice.Company resp = CompanyMapper.ConvertInterfaceToWebservice(company,ref contatos);
+            ResellerWebservice.Company wsCompany = CompanyMapper.ConvertInterfaceToWebservice(company,ref contatos);
+            ResellerWebservice.Retorno ret = webservice.Company_Insert("ResellerAPI", "", wsCompany, "");
+            Response resp = new Response(ret.Mensagem, ret.Sucesso);
 
-            return CompanyMapper.ConvertWebserviceToInterface(resp.Company, null);
+            return resp;
         }
 
-        public Response GenerateProposal(User user, Item[] items, string from, string to, bool directInvoice, string endUserCode, bool sendEmail, string[] cc)
+        public Response GenerateProposal(User user, Item[] items,ProposalRequest proposalData)
         {
-            throw new NotImplementedException();
+            UserValidator.CheckUser(user);
+            ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
+
+            string[][] partnumbers = new string[items.Length][];
+            for (int i = 0, len = items.Length; i < len; i++)
+            {
+                partnumbers[i][0] = items[i].SKU;
+                partnumbers[i][1] = items[i].Quantity.ToString();
+                partnumbers[i][2] = items[i].Uplift.ToString();
+            }
+            ResellerWebservice.UserResponse wsUser = webservice.IsUserValid(user.Login, user.Password);
+            ResellerWebservice.ProposalResponse resp;
+           
+            resp = webservice.GenerateProposalGeneric(wsUser, partnumbers, proposalData.ClientCNPJ, proposalData.ClientClass, proposalData.Order, 
+                    proposalData.DeliveryCNPJ, proposalData.Remarks, proposalData.InHold, proposalData.EndUserCNPJ, proposalData.DirectInvoice);
+
+            Response response = new Response();
+            response.Success = resp.Success;
+            response.Message = (resp.Success) ? "" : resp.ErrorCode + " - " + resp.ErrorMessage;
+
+            return response;
         }
 
         public Response GenerateQuote(User user, Item[] items, string from, string to, bool directInvoice, string endUserCode)

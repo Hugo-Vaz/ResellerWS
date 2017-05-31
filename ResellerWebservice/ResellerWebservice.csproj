@@ -196,6 +196,7 @@
     <Compile Include="Entities\Location.cs" />
     <Compile Include="Entities\Proposal.cs" />
     <Compile Include="Entities\ProposalOption.cs" />
+    <Compile Include="Entities\ProposalRequest.cs" />
     <Compile Include="Entities\Quote.cs" />
     <Compile Include="Entities\QuoteLine.cs" />
     <Compile Include="Entities\ResellerTracking.cs" />
@@ -277,10 +278,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>ResellerWebservice_PartnerPortalWebservice_PartnerPortal</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://webserviceshlg.westcon.com.br/Reseller.asmx">
+    <WebReferenceUrl Include="http://localhost/WestconLatin.Webservice/Reseller.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\ResellerWebservice\</RelPath>
-      <UpdateFromURL>http://webserviceshlg.westcon.com.br/Reseller.asmx</UpdateFromURL>
+      <UpdateFromURL>http://localhost/WestconLatin.Webservice/Reseller.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

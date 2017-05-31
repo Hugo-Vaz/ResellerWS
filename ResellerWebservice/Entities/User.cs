@@ -14,10 +14,11 @@ namespace ResellerWebservice.Entities
         [DataMember]
         public string Name { get; set; }
         [DataMember]
+        public string Login { get; set; }
+        [DataMember]
         public string Password { get; set; }
         [DataMember]
-        public bool IsBlocked { get; set; }
-      
+        public bool IsBlocked { get; set; }      
         [DataMember]
         public string Cellphone { get; set; }
         [DataMember]
@@ -26,10 +27,7 @@ namespace ResellerWebservice.Entities
         public string AccountManagerCode { get; set; }
         [DataMember]
         public int CustomerID { get; set; }
-        [DataMember]
-        public EconomicGroup EconomicGroup { get; set; }
-        [DataMember]
-        public Company Company { get; set; }
+       
 
     }
 }
