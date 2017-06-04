@@ -26,7 +26,7 @@ namespace ResellerWebservice.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://webserviceshlg.westcon.com.br/PartnerPortal.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://webserviceshlg.westcon.com.br/Reseller.asmx")]
         public string ResellerWebservice_PartnerPortalWebservice_PartnerPortal {
             get {
                 return ((string)(this["ResellerWebservice_PartnerPortalWebservice_PartnerPortal"]));

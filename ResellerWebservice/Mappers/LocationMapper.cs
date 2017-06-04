@@ -15,8 +15,8 @@ namespace ResellerWebservice.Mappers
             foreach(DataRow row in data.Rows)
             {
                 Location l = new Location();
-                l.WestconCode = row["Id"].ToString();
-                l.Name = row["Name"].ToString();
+                l.WestconCode = row[0].ToString();
+                l.Name = row[1].ToString();
 
                 list.Add(l);
             }

@@ -278,10 +278,10 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>ResellerWebservice_PartnerPortalWebservice_PartnerPortal</CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://localhost/WestconLatin.Webservice/Reseller.asmx">
+    <WebReferenceUrl Include="http://webserviceshlg.westcon.com.br/Reseller.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\ResellerWebservice\</RelPath>
-      <UpdateFromURL>http://localhost/WestconLatin.Webservice/Reseller.asmx</UpdateFromURL>
+      <UpdateFromURL>http://webserviceshlg.westcon.com.br/Reseller.asmx</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>

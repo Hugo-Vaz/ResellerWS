@@ -8,8 +8,9 @@ using ResellerWebservice.Entities;
 using ResellerWebservice.Mappers;
 using ResellerWebservice.Helpers;
 using System.Data;
+using ResellerWebservice.Interfaces;
 
-namespace ResellerWebservice.Interfaces
+namespace ResellerWebservice.Services
 {
     // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "ResellerService" in code, svc and config file together.
     // NOTE: In order to launch WCF Test Client for testing this service, please select ResellerService.svc or ResellerService.svc.cs at the Solution Explorer and start debugging.
@@ -58,19 +59,35 @@ namespace ResellerWebservice.Interfaces
             ResellerWebservice.UserResponse wsUser = webservice.IsUserValid(user.Login, user.Password);
             ResellerWebservice.ProposalResponse resp;
            
-            resp = webservice.GenerateProposalGeneric(wsUser, partnumbers, proposalData.ClientCNPJ, proposalData.ClientClass, proposalData.Order, 
-                    proposalData.DeliveryCNPJ, proposalData.Remarks, proposalData.InHold, proposalData.EndUserCNPJ, proposalData.DirectInvoice);
+            //resp = webservice.GenerateProposalGeneric(wsUser, partnumbers, proposalData.ClientCNPJ, proposalData.ClientClass, proposalData.Order, 
+            //        proposalData.DeliveryCNPJ, proposalData.Remarks, proposalData.InHold, proposalData.EndUserCNPJ, proposalData.DirectInvoice);
 
             Response response = new Response();
-            response.Success = resp.Success;
-            response.Message = (resp.Success) ? "" : resp.ErrorCode + " - " + resp.ErrorMessage;
+            //response.Success = resp.Success;
+            //response.Message = (resp.Success) ? "" : resp.ErrorCode + " - " + resp.ErrorMessage;
 
             return response;
         }
 
-        public Response GenerateQuote(User user, Item[] items, string from, string to, bool directInvoice, string endUserCode)
+        public Quote GenerateQuote(User user, Item[] items, string from,string billToCNPJ)
         {
-            throw new NotImplementedException();
+            UserValidator.CheckUser(user);
+            PartnerPortalWebservice.PartnerPortal pp = new PartnerPortalWebservice.PartnerPortal();
+            ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
+
+            ResellerWebservice.UserResponse wsUser = webservice.IsUserValid(user.Login, user.Password);
+
+            string[][] partnumbers = new string[items.Length][];
+            for (int i = 0, len = items.Length; i < len; i++)
+            {
+                partnumbers[i][0] = items[i].SKU;
+                partnumbers[i][1] = items[i].Quantity.ToString();
+                partnumbers[i][2] = items[i].Uplift.ToString();
+            }
+
+            PartnerPortalWebservice.Quotation wsQuote = pp.GenerateQuote(partnumbers, 1, wsUser.User.CodUsuario, from, billToCNPJ, null, null);
+
+            return QuoteMapper.WebserviceToInterface(wsQuote);
         }
 
         public Company GetCompany(User user, string companyCode,int codERP)
@@ -111,7 +128,7 @@ namespace ResellerWebservice.Interfaces
         public Location[] ListCountries(User user,string countryName)
         {
             UserValidator.CheckUser(user);
-            ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
+            PartnerPortalWebservice.PartnerPortal webservice = new PartnerPortalWebservice.PartnerPortal();
             DataTable dt = webservice.Applications_Countries(countryName);
 
             return LocationMapper.ConvertDatatableToModel(dt);

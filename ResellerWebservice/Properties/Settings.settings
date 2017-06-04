@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ResellerWebservice_PartnerPortalWebservice_PartnerPortal" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://webserviceshlg.westcon.com.br/PartnerPortal.asmx</Value>
+      <Value Profile="(Default)">http://webserviceshlg.westcon.com.br/Reseller.asmx</Value>
     </Setting>
   </Settings>
 </SettingsFile>

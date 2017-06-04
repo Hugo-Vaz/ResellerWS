@@ -16,7 +16,7 @@ namespace ResellerWebservice.Interfaces
         Stock[] CheckStock(User user, string[] partNumbers, int erp, bool activeOnly);
 
         [OperationContract]
-        Response GenerateQuote(User user, Item[] items, string from,string to, bool directInvoice, string endUserCode);
+        Quote GenerateQuote(User user, Item[] items, string from, string billToCNPJ);
 
         [OperationContract]
         Response GenerateProposal(User user, Item[] items, ProposalRequest proposalData);
