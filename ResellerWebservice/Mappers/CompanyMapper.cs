@@ -62,6 +62,61 @@ namespace ResellerWebservice.Mappers
             return company;
         }
 
+        public static Company ConvertWebserviceToInterface(PartnerPortalWebservice.Company wsCompany, PartnerPortalWebservice.Contato[] wsContatos = null)
+        {
+            Company company = new Company();
+
+            company.Address = new Address();
+            company.CNPJ = wsCompany.CNPJ;
+            company.CustomerId = wsCompany.CustomerId;
+            company.InscricaoEstadual = wsCompany.InscricaoEstadual;
+            company.InscricaoMunicipal = wsCompany.InscricaoMunicipal;
+            company.NomeFantasia = wsCompany.NomeFantasia;
+            company.RazaoSocial = wsCompany.RazaoSocial;
+            company.Telephone = wsCompany.Telefone;
+
+            company.Address.AddressLine = wsCompany.Logradouro;
+            company.Address.Number = wsCompany.Numero;
+            company.Address.Block = wsCompany.Bairro;
+
+            company.Address.City = new Location();
+            company.Address.City.WestconCode = wsCompany.ukeyCidade;
+            company.Address.City.Name = wsCompany.Cidade;
+            company.Address.ZipCode = wsCompany.CEP;
+            company.Address.Number = wsCompany.Numero;
+
+            company.Address.State = new Location();
+            company.Address.State.WestconCode = wsCompany.ukeyEstado;
+            company.Address.State.Name = wsCompany.Estado;
+
+            company.Address.Country = new Location();
+            company.Address.Country.WestconCode = wsCompany.ukeyPais;
+            company.Address.Country.Name = wsCompany.Pais;
+
+            if (wsContatos != null)
+            {
+                List<Contact> list = new List<Contact>();
+
+                foreach (PartnerPortalWebservice.Contato contato in wsContatos)
+                {
+                    Contact c = new Contact();
+                    c.Email = contato.Email;
+                    c.Name = contato.Nome;
+                    c.Phone = contato.Telefone;
+                    c.ReceiveFinancialInfo = contato.RecebeInfoFinanceira;
+                    c.ReceiveNFe = contato.RecebeNFe;
+                    c.ReceiveNFeXML = contato.RecebeXMLNota;
+
+                    list.Add(c);
+                }
+
+                company.Contacts = list.ToArray();
+            }
+
+            return company;
+        }
+
+
         public static ResellerWebservice.Company ConvertInterfaceToWebservice(Company company, ref List<ResellerWebservice.Contato> wsContatos)
         {
             ResellerWebservice.Company wsCompany = new ResellerWebservice.Company();
@@ -110,4 +165,6 @@ namespace ResellerWebservice.Mappers
             return wsCompany;
         }
     }
+
+
 }

@@ -13,7 +13,7 @@ namespace ResellerWebservice.Interfaces
     public interface IResellerService
     {
         [OperationContract]
-        Stock[] CheckStock(User user, string[] partNumbers, int erp, bool activeOnly);
+        Stock[] CheckStock(User user, string[] partNumbers, bool activeOnly);
 
         [OperationContract]
         Quote GenerateQuote(User user, Item[] items, string from, string billToCNPJ);
@@ -22,7 +22,7 @@ namespace ResellerWebservice.Interfaces
         Proposal GenerateProposal(User user, Item[] items, ProposalRequest proposalData);
 
         [OperationContract]
-        Company GetCompany(User user, string companyCode, int codERP);
+        Company GetCompany(User user, string companyCode);
 
         [OperationContract]
         Response CompanyInsert(User user, Company company);

@@ -27,7 +27,9 @@ namespace ResellerWebservice.Entities
         public string AccountManagerCode { get; set; }
         [DataMember]
         public int CustomerID { get; set; }
-       
+        [DataMember]
+        public int CodERP { get; set; }
+
 
     }
 }

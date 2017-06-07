@@ -16,11 +16,11 @@ namespace ResellerWebservice.Services
     // NOTE: In order to launch WCF Test Client for testing this service, please select ResellerService.svc or ResellerService.svc.cs at the Solution Explorer and start debugging.
     public class ResellerService : IResellerService
     {
-        public Stock[] CheckStock(User user, string[] partNumbers, int erp, bool activeOnly)
+        public Stock[] CheckStock(User user, string[] partNumbers, bool activeOnly)
         {
             UserValidator.CheckUser(user);
             ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
-            ResellerWebservice.Stock wsStock = webservice.CheckStock(partNumbers, erp);
+            ResellerWebservice.Stock wsStock = webservice.CheckStock(partNumbers, user.CodERP);
             List<Stock> stocks = new List<Stock>();
 
             foreach(ResellerWebservice.StockItem s in wsStock.Items)
@@ -95,11 +95,11 @@ namespace ResellerWebservice.Services
             return QuoteMapper.WebserviceToInterface(wsQuote);
         }
 
-        public Company GetCompany(User user, string companyCode,int codERP)
+        public Company GetCompany(User user, string companyCode)
         {
             UserValidator.CheckUser(user);
             ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
-            ResellerWebservice.CompanyResponse resp = webservice.Company_GetData(companyCode, codERP);
+            ResellerWebservice.CompanyResponse resp = webservice.Company_GetData(companyCode, user.CodERP);
 
             return CompanyMapper.ConvertWebserviceToInterface(resp.Company, null);
         }

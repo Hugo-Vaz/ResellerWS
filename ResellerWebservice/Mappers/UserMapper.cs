@@ -19,6 +19,7 @@ namespace ResellerWebservice.Mappers
             user.Password = wsUser.User.Senha;
             user.UniqueIdentifier = wsUser.User.CPF;
             user.AccountManagerCode = wsUser.User.CodVendedor;
+            user.CodERP = (int)wsUser.User.Empresa.CodERP;
             return user;
         }
     }
