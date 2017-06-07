@@ -44,7 +44,7 @@ namespace ResellerWebservice.Services
             return resp;
         }
 
-        public Response GenerateProposal(User user, Item[] items,ProposalRequest proposalData)
+        public Proposal GenerateProposal(User user, Item[] items,ProposalRequest proposalData)
         {
             UserValidator.CheckUser(user);
             ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
@@ -58,15 +58,20 @@ namespace ResellerWebservice.Services
             }
             ResellerWebservice.UserResponse wsUser = webservice.IsUserValid(user.Login, user.Password);
             ResellerWebservice.ProposalResponse resp;
-           
+
+
             //resp = webservice.GenerateProposalGeneric(wsUser, partnumbers, proposalData.ClientCNPJ, proposalData.ClientClass, proposalData.Order, 
             //        proposalData.DeliveryCNPJ, proposalData.Remarks, proposalData.InHold, proposalData.EndUserCNPJ, proposalData.DirectInvoice);
+            if (!proposalData.DirectInvoice)
+            {
+                resp = webservice.GenerateProposal(partnumbers, proposalData.ClientCNPJ, proposalData.ClientClass, proposalData.Order, proposalData.DeliveryCNPJ, proposalData.Remarks, proposalData.InHold);
+            }else
+            {
+                resp = webservice.GenerateProposalDirectInvoice(partnumbers, proposalData.ClientCNPJ, proposalData.ClientClass, proposalData.Order, proposalData.DeliveryCNPJ, proposalData.Remarks, proposalData.InHold, proposalData.EndUserCNPJ);
+            }          
+            
 
-            Response response = new Response();
-            //response.Success = resp.Success;
-            //response.Message = (resp.Success) ? "" : resp.ErrorCode + " - " + resp.ErrorMessage;
-
-            return response;
+            return ProposalMapper.ConvertWebserviceToInterface(resp);
         }
 
         public Quote GenerateQuote(User user, Item[] items, string from,string billToCNPJ)
@@ -138,7 +143,7 @@ namespace ResellerWebservice.Services
         {
             UserValidator.CheckUser(user);
             ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
-            DataTable dt = webservice.Applications_Cities(countryCode, stateName);
+            DataTable dt = webservice.Applications_States(countryCode, stateName);
 
             return LocationMapper.ConvertDatatableToModel(dt);
         }

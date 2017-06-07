@@ -44,5 +44,10 @@ namespace ResellerWebservice.Entities
        
         [DataMember]
         public ProposalOption[] Options { get; set; }
+
+        [DataMember]
+        public bool Success { get; set; }
+        [DataMember]
+        public string Message { get; set; }
     }
 }

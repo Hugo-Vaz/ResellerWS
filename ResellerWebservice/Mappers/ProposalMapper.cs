@@ -25,6 +25,8 @@ namespace ResellerWebservice.Mappers
             proposal.TotalWithoutTaxes = wsProposal.Proposta.ValorSemImposto;
             proposal.TotalWitoutICMS = wsProposal.Proposta.ValorSemIcms;
             proposal.Version = wsProposal.Proposta.Versao;
+            proposal.Success = wsProposal.Success;
+            proposal.Message = wsProposal.ErrorMessage;
 
             List<ProposalOption> options = new List<ProposalOption>();
             foreach (ResellerWebservice.OptionResponse wsOption in wsProposal.Opcoes)
