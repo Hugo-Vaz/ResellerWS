@@ -8,8 +8,8 @@ using System.Xml.Serialization;
 namespace ResellerWebservice.Entities
 {
     [DataContract(IsReference = true)]
-    [XmlRoot(Namespace = "Generic", ElementName = "Company")]
-    public class ResellerTracking
+    [XmlRoot(Namespace = "Generic", ElementName = "ResellerTracking")]
+    public class OrderTracking
     {
         [DataMember]
         public string Vendor { get; set; }

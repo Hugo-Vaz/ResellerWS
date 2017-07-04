@@ -8,9 +8,9 @@ namespace ResellerWebservice.Mappers
 {
     public static class ProposalMapper
     {
-        public static Proposal ConvertWebserviceToInterface(ResellerWebservice.ProposalResponse wsProposal)
+        public static Order ConvertWebserviceToInterface(ResellerWebservice.ProposalResponse wsProposal)
         {
-            Proposal proposal = new Proposal();
+            Order proposal = new Order();
             proposal.Name = wsProposal.Proposta.NomeProposta;
             proposal.CodForecast = wsProposal.CodForecast;
             proposal.ExpiryDate = wsProposal.DataValidade;
@@ -28,7 +28,7 @@ namespace ResellerWebservice.Mappers
             proposal.Success = wsProposal.Success;
             proposal.Message = wsProposal.ErrorMessage;
 
-            List<ProposalOption> options = new List<ProposalOption>();
+            List<OrderOption> options = new List<OrderOption>();
             foreach (ResellerWebservice.OptionResponse wsOption in wsProposal.Opcoes)
             {
                 options.Add(ProposalMapper.ConvertWebserviceToInterface(wsOption));
@@ -38,9 +38,9 @@ namespace ResellerWebservice.Mappers
             return proposal;
         }
 
-        public static ProposalOption ConvertWebserviceToInterface(ResellerWebservice.OptionResponse wsOption)
+        public static OrderOption ConvertWebserviceToInterface(ResellerWebservice.OptionResponse wsOption)
         {
-            ProposalOption option = new ProposalOption();
+            OrderOption option = new OrderOption();
             option.DollarValue = wsOption.ValorDollar;
             option.TotalWithoutTaxes = wsOption.TotalSemImposto;
             option.TotalWithoutICMS = wsOption.TotalSemICMS;

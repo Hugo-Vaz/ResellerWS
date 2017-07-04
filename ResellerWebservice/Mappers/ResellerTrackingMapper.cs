@@ -11,12 +11,12 @@ namespace ResellerWebservice.Mappers
 {
     public static class ResellerTrackingMapper
     {
-        public static ResellerTracking[] ConvertDatatableToInterface(DataTable data)
+        public static OrderTracking[] ConvertDatatableToInterface(DataTable data)
         {
-            List<ResellerTracking> tracks = new List<ResellerTracking>();
+            List<OrderTracking> tracks = new List<OrderTracking>();
             foreach (DataRow row in data.Rows)
             {
-                ResellerTracking track = new ResellerTracking();
+                OrderTracking track = new OrderTracking();
                 track.BrazilianDate = ConversionTool.ToDate(row["DataBrasil"].ToString());
                 track.CiscoOrderApprovalDate = ConversionTool.ToDate(row["DataPoCisco"].ToString());
                 track.CiscoOriginalForecast = ConversionTool.ToDate(row["PrevisaoOriginalPoCisco"].ToString());

@@ -61,6 +61,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\PublishProfiles\Publish.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -181,7 +182,9 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web References\ResellerWebservice\Reseller.disco" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="Web References\ResellerWebservice\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -194,12 +197,12 @@
     <Compile Include="Entities\EconomicGroup.cs" />
     <Compile Include="Entities\Item.cs" />
     <Compile Include="Entities\Location.cs" />
-    <Compile Include="Entities\Proposal.cs" />
-    <Compile Include="Entities\ProposalOption.cs" />
-    <Compile Include="Entities\ProposalRequest.cs" />
+    <Compile Include="Entities\Order.cs" />
+    <Compile Include="Entities\OrderOption.cs" />
+    <Compile Include="Entities\OrderRequest.cs" />
     <Compile Include="Entities\Quote.cs" />
     <Compile Include="Entities\QuoteLine.cs" />
-    <Compile Include="Entities\ResellerTracking.cs" />
+    <Compile Include="Entities\OrderTracking.cs" />
     <Compile Include="Entities\Response.cs" />
     <Compile Include="Entities\Stock.cs" />
     <Compile Include="Entities\User.cs" />

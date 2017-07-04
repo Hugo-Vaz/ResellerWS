@@ -9,7 +9,7 @@ namespace ResellerWebservice.Entities
 {
     [DataContract(IsReference = true)]
     [XmlRoot(Namespace = "Generic", ElementName = "Option")]
-    public class ProposalOption
+    public class OrderOption
     {
         [DataMember]
         public Item[] Items { get; set; }

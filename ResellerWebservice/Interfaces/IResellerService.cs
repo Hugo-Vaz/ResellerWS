@@ -13,13 +13,16 @@ namespace ResellerWebservice.Interfaces
     public interface IResellerService
     {
         [OperationContract]
+        Response ApproveHold(User user, string order);
+
+        [OperationContract]
         Stock[] CheckStock(User user, string[] partNumbers, bool activeOnly);
 
         [OperationContract]
-        Quote GenerateQuote(User user, Item[] items, string from, string billToCNPJ);
+        Quote GetQuote(User user, Item[] items, string from, string billToCompanyCode);
 
         [OperationContract]
-        Proposal GenerateProposal(User user, Item[] items, ProposalRequest proposalData);
+        Order CreateOrder(User user, Item[] items, OrderRequest proposalData);
 
         [OperationContract]
         Company GetCompany(User user, string companyCode);
@@ -36,5 +39,8 @@ namespace ResellerWebservice.Interfaces
 
         [OperationContract]
         User IsUserValid(string login, string password);
+
+        [OperationContract]
+        OrderTracking[] OrderTracking(string billToCompanyCode, string orderNumber);
     }
 }

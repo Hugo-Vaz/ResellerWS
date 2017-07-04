@@ -16,6 +16,15 @@ namespace ResellerWebservice.Services
     // NOTE: In order to launch WCF Test Client for testing this service, please select ResellerService.svc or ResellerService.svc.cs at the Solution Explorer and start debugging.
     public class ResellerService : IResellerService
     {
+        public Response ApproveHold(User user,string order)
+        {
+            ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
+            ResellerWebservice.GenericResponse wsResp = webservice.ApproveHold(order);
+            Response resp = new Response(wsResp.ErrorMessage, wsResp.Success);
+
+            return resp;
+        }
+
         public Stock[] CheckStock(User user, string[] partNumbers, bool activeOnly)
         {
             UserValidator.CheckUser(user);
@@ -44,7 +53,7 @@ namespace ResellerWebservice.Services
             return resp;
         }
 
-        public Proposal GenerateProposal(User user, Item[] items,ProposalRequest proposalData)
+        public Order CreateOrder(User user, Item[] items,OrderRequest proposalData)
         {
             UserValidator.CheckUser(user);
             ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
@@ -64,17 +73,17 @@ namespace ResellerWebservice.Services
             //        proposalData.DeliveryCNPJ, proposalData.Remarks, proposalData.InHold, proposalData.EndUserCNPJ, proposalData.DirectInvoice);
             if (!proposalData.DirectInvoice)
             {
-                resp = webservice.GenerateProposal(partnumbers, proposalData.ClientCNPJ, proposalData.ClientClass, proposalData.Order, proposalData.DeliveryCNPJ, proposalData.Remarks, proposalData.InHold);
+                resp = webservice.GenerateProposal(partnumbers, proposalData.CustomerCompanyCode, proposalData.CustomerClass, proposalData.Order, proposalData.DeliveryCompanyCode, proposalData.Remarks, proposalData.InHold);
             }else
             {
-                resp = webservice.GenerateProposalDirectInvoice(partnumbers, proposalData.ClientCNPJ, proposalData.ClientClass, proposalData.Order, proposalData.DeliveryCNPJ, proposalData.Remarks, proposalData.InHold, proposalData.EndUserCNPJ);
+                resp = webservice.GenerateProposalDirectInvoice(partnumbers, proposalData.CustomerCompanyCode, proposalData.CustomerClass, proposalData.Order, proposalData.DeliveryCompanyCode, proposalData.Remarks, proposalData.InHold, proposalData.EndUserCompanyCode);
             }          
             
 
             return ProposalMapper.ConvertWebserviceToInterface(resp);
         }
 
-        public Quote GenerateQuote(User user, Item[] items, string from,string billToCNPJ)
+        public Quote GetQuote(User user, Item[] items, string from,string billToCNPJ)
         {
             UserValidator.CheckUser(user);
             PartnerPortalWebservice.PartnerPortal pp = new PartnerPortalWebservice.PartnerPortal();
@@ -146,6 +155,14 @@ namespace ResellerWebservice.Services
             DataTable dt = webservice.Applications_States(countryCode, stateName);
 
             return LocationMapper.ConvertDatatableToModel(dt);
+        }
+
+        public OrderTracking[] OrderTracking(string billToCompanyCode, string orderNumber)
+        {
+            ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
+            DataTable dt = webservice.OrderTracking(billToCompanyCode, orderNumber).orders;
+
+            return ResellerTrackingMapper.ConvertDatatableToInterface(dt);
         }
     }
 }

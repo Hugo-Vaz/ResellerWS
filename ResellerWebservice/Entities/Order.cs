@@ -8,8 +8,8 @@ using System.Xml.Serialization;
 namespace ResellerWebservice.Entities
 {
     [DataContract(IsReference = true)]
-    [XmlRoot(Namespace = "Generic", ElementName = "Proposal")]
-    public class Proposal
+    [XmlRoot(Namespace = "Generic", ElementName = "Order")]
+    public class Order
     {
         [DataMember]
         public String CodForecast { get; set; }
@@ -43,7 +43,7 @@ namespace ResellerWebservice.Entities
         public decimal SalesTaxesRate{ get; set; }
        
         [DataMember]
-        public ProposalOption[] Options { get; set; }
+        public OrderOption[] Options { get; set; }
 
         [DataMember]
         public bool Success { get; set; }

@@ -6,16 +6,16 @@ using System.Web;
 
 namespace ResellerWebservice.Entities
 {
-    public class ProposalRequest
+    public class OrderRequest
     {
         [DataMember]
-        public string ClientCNPJ { get; set; }
+        public string CustomerCompanyCode { get; set; }
         [DataMember]
-        public int ClientClass { get; set; }
+        public int CustomerClass { get; set; }
         [DataMember]
         public string Order { get; set; }
         [DataMember]
-        public string DeliveryCNPJ { get; set; }
+        public string DeliveryCompanyCode { get; set; }
         [DataMember]
         public string Remarks { get; set; }
         [DataMember]
@@ -23,6 +23,6 @@ namespace ResellerWebservice.Entities
         [DataMember]
         public bool DirectInvoice { get; set; }
         [DataMember]
-        public string EndUserCNPJ { get; set; }     
+        public string EndUserCompanyCode { get; set; }
     }
 }
