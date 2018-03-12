@@ -76,33 +76,33 @@ namespace ResellerWebservice.Services
                 resp = webservice.GenerateProposal(partnumbers, proposalData.CustomerCompanyCode, proposalData.CustomerClass, proposalData.Order, proposalData.DeliveryCompanyCode, proposalData.Remarks, proposalData.InHold);
             }else
             {
-                resp = webservice.GenerateProposalDirectInvoice(partnumbers, proposalData.CustomerCompanyCode, proposalData.CustomerClass, proposalData.Order, proposalData.DeliveryCompanyCode, proposalData.Remarks, proposalData.InHold, proposalData.EndUserCompanyCode);
+                resp = webservice.GenerateProposalDirectInvoice(partnumbers, proposalData.CustomerCompanyCode,  proposalData.Order, proposalData.DeliveryCompanyCode, proposalData.Remarks, proposalData.InHold, proposalData.EndUserCompanyCode);
             }          
             
 
             return ProposalMapper.ConvertWebserviceToInterface(resp);
         }
 
-        public Quote GetQuote(User user, Item[] items, string from,string billToCNPJ)
-        {
-            UserValidator.CheckUser(user);
-            PartnerPortalWebservice.PartnerPortal pp = new PartnerPortalWebservice.PartnerPortal();
-            ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
+        //public Quote GetQuote(User user, Item[] items, string from,string billToCNPJ)
+        //{
+        //    UserValidator.CheckUser(user);
+        //    PartnerPortalWebservice.PartnerPortal pp = new PartnerPortalWebservice.PartnerPortal();
+        //    ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
 
-            ResellerWebservice.UserResponse wsUser = webservice.IsUserValid(user.Login, user.Password);
+        //    ResellerWebservice.UserResponse wsUser = webservice.IsUserValid(user.Login, user.Password);
 
-            string[][] partnumbers = new string[items.Length][];
-            for (int i = 0, len = items.Length; i < len; i++)
-            {
-                partnumbers[i][0] = items[i].SKU;
-                partnumbers[i][1] = items[i].Quantity.ToString();
-                partnumbers[i][2] = items[i].Uplift.ToString();
-            }
+        //    string[][] partnumbers = new string[items.Length][];
+        //    for (int i = 0, len = items.Length; i < len; i++)
+        //    {
+        //        partnumbers[i][0] = items[i].SKU;
+        //        partnumbers[i][1] = items[i].Quantity.ToString();
+        //        partnumbers[i][2] = items[i].Uplift.ToString();
+        //    }
 
-            PartnerPortalWebservice.Quotation wsQuote = pp.GenerateQuote(partnumbers, 1, wsUser.User.CodUsuario, from, billToCNPJ, null, null);
+        //    PartnerPortalWebservice.Quotation wsQuote = pp.GenerateQuote(partnumbers, 1, wsUser.User.CodUsuario, from, billToCNPJ, null, null);
 
-            return QuoteMapper.WebserviceToInterface(wsQuote);
-        }
+        //    return QuoteMapper.WebserviceToInterface(wsQuote);
+        //}
 
         public Company GetCompany(User user, string companyCode)
         {

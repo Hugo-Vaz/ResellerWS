@@ -43,7 +43,6 @@ namespace ResellerWebservice.Mappers
             line.IsActive = wsItem.Ativo;
             line.ListPrice = wsItem.PrecoLista;
             line.NCM = wsItem.NCM;
-            line.NetPrice = wsItem.PrecoNET;
             line.RegionCode = wsItem.CodRegiao;
             line.ResellerPrice = wsItem.PrecoRevenda;
             line.ResellerPriceWithUplift = wsItem.PrecoRevendaComUplift;

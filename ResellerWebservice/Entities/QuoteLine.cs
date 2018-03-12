@@ -54,8 +54,6 @@ namespace ResellerWebservice.Entities
         [DataMember]
         public decimal FOBPrice { get; set; }
         [DataMember]
-        public decimal NetPrice { get; set; }
-        [DataMember]
         public decimal ICMS { get; set; }
         [DataMember]
         public decimal IPI { get; set; }

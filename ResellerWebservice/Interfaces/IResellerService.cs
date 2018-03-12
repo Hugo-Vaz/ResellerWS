@@ -18,8 +18,8 @@ namespace ResellerWebservice.Interfaces
         [OperationContract]
         Stock[] CheckStock(User user, string[] partNumbers, bool activeOnly);
 
-        [OperationContract]
-        Quote GetQuote(User user, Item[] items, string from, string billToCompanyCode);
+        //[OperationContract]
+        //Quote GetQuote(User user, Item[] items, string from, string billToCompanyCode);
 
         [OperationContract]
         Order CreateOrder(User user, Item[] items, OrderRequest proposalData);
