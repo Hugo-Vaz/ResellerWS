@@ -162,7 +162,18 @@ namespace ResellerWebservice.Services
             ResellerWebservice.Reseller webservice = new ResellerWebservice.Reseller();
             DataTable dt = webservice.OrderTracking(billToCompanyCode, orderNumber).orders;
 
+            if(dt == null || dt.Rows.Count < 1)
+            {
+                this.ExceptionThrower("51", "No orders found for the given tracking number.");
+            }
+
             return ResellerTrackingMapper.ConvertDatatableToInterface(dt);
+        }
+
+        private void ExceptionThrower(string faultCode,string message)
+        {
+            FaultCode prionFaultCode = new FaultCode(faultCode);
+            throw new FaultException(message, prionFaultCode);
         }
     }
 }

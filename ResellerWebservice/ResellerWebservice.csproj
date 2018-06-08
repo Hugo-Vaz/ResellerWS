@@ -187,6 +187,15 @@
     <Content Include="Web References\PartnerPortalWebservice\VendorResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
+    <Content Include="Web References\ResellerWebservice\CompanyResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\GenericResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\ProposalResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
     <None Include="Web References\ResellerWebservice\Reseller.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -260,6 +269,24 @@
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <Content Include="Web References\ResellerWebservice\UserResponse1.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\ResellerTracking.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\Retorno.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\SKUResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\Stock.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\StockPremium.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </Content>
+    <Content Include="Web References\ResellerWebservice\UserResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </Content>
     <None Include="Web.Debug.config">
